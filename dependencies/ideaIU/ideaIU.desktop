@@ -1,0 +1,6 @@
+[Desktop Entry]
+Type=Application
+Name=IntelliJ IDEA Ultimate
+Exec=bin/idea.sh
+Icon=idea
+Categories=Development
