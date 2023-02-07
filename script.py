@@ -1,7 +1,6 @@
 import os
 import shutil
 import platform
-from subprocess import call
 from PIL import Image
 # for now only works with ideaIU-2022.3.2
 
@@ -64,8 +63,8 @@ def set_icon():
 
 
 def copy_dependencies():
-    call(["cp", dep_ideaIU_AppRun, ideaIU_AppRun])
-    call(["cp", dep_ideaIU_desktop, ideaIU_desktop])
+    os.system("cp " + dep_ideaIU_AppRun + " " + ideaIU_AppRun)
+    os.system("cp " + dep_ideaIU_desktop + " " + ideaIU_desktop)
 
 def createAppImage():
     os.system("sudo " + arch + " " + appimagetool + " " + AppDir_ideaIU)
