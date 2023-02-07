@@ -2,6 +2,7 @@ import os
 import shutil
 import platform
 import json
+from zipfile import ZipFile
 from PIL import Image
 # for now only works with ideaIU-2022.3.2
 
@@ -15,15 +16,17 @@ appimagetool = 'dependencies/appimagetool-x86_64.AppImage'
 with open(os.path.join(dependencies, 'conf.json')) as f:
     conf = json.load(f)
     ideaIU_conf = conf['ideaIU-2022_3_2']
-    AppDir_ideaIU = ideaIU_conf['AppDir']
-    usr_ideaIU = ideaIU_conf['usr']
-    bin_ideaIU = ideaIU_conf['bin']
-    source = ideaIU_conf['source']
-    icon_ideaIU = ideaIU_conf['icon']
-    dep_ideaIU_AppRun = ideaIU_conf['dep_AppRun']
-    dep_ideaIU_desktop = ideaIU_conf['dep_desktop']
-    ideaIU_AppRun = ideaIU_conf['AppRun']
-    ideaIU_desktop = ideaIU_conf['desktop']
+    source_zip_file = ideaIU_conf['zip']
+    AppDir_folder = ideaIU_conf['AppDir']
+    usr_folder = ideaIU_conf['usr']
+    bin_folder = ideaIU_conf['bin']
+    source_folder = ideaIU_conf['source']
+    source_icon = ideaIU_conf['source_icon']
+    icon = ideaIU_conf['icon']
+    dep_AppRun = ideaIU_conf['dep_AppRun']
+    dep_desktop = ideaIU_conf['dep_desktop']
+    AppRun = ideaIU_conf['AppRun']
+    desktop = ideaIU_conf['desktop']
 
 # checks if needed stuff is there
 def check():
@@ -39,7 +42,13 @@ def check():
         print("Dependencies:        FAILED (Redownload the dependencies folder)")
         exit()
 
-
+def unzip():
+    # loading the temp.zip and creating a zip object
+    with ZipFile(source_zip_file, 'r') as zObject:
+  
+    # Extracting all the members of the zip 
+    # into a specific location.
+    zObject.extractall(temp)
 # creates AppDir
 def createAppDir():
     istemp = os.path.isdir(temp)
@@ -48,26 +57,25 @@ def createAppDir():
         os.mkdir(temp)
     else:
         os.mkdir(temp)
-    os.mkdir(AppDir_ideaIU)
-    os.mkdir(usr_ideaIU)
+    os.mkdir(AppDir_folder)
+    os.mkdir(usr_folder)
 
 # copies the folder to the appimage one
 def copy_to_AppDir():
-    shutil.copytree(source, bin_ideaIU)
+    shutil.copytree(source_folder, bin_folder)
 
 
 def set_icon():
-    icon = "temp/ideaIU-2022.3.2.AppDir/idea.png"
-    with open(icon_ideaIU, 'r+b') as f:
+    with open(source_icon, 'r+b') as f:
         with Image.open(f) as image:
-            image = Image.open(icon_ideaIU)
+            image = Image.open(source_icon)
             new_image = image.resize((icon_size, icon_size))
             new_image.save(icon)
 
 
 def copy_dependencies():
-    os.system("cp " + dep_ideaIU_AppRun + " " + ideaIU_AppRun)
-    os.system("cp " + dep_ideaIU_desktop + " " + ideaIU_desktop)
+    os.system("cp " + dep_AppRun + " " + AppRun)
+    os.system("cp " + dep_desktop + " " + desktop)
 
 def createAppImage():
     os.system("sudo " + arch + " " + appimagetool + " " + AppDir_ideaIU)
