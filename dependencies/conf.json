@@ -1,0 +1,13 @@
+{
+  "ideaIU-2022_3_2": {
+    "AppDir": "temp/ideaIU-2022.3.2.AppDir",
+    "usr": "temp/ideaIU-2022.3.2.AppDir/usr",
+    "bin":"temp/ideaIU-2022.3.2.AppDir/usr/bin",
+    "source":"ideaIU-2022.3.2/idea-IU-223.8617.56/",
+    "dep_AppRun":"dependencies/ideaIU/AppRun",
+    "dep_desktop":"dependencies/ideaIU/ideaIU.desktop",
+    "AppRun":"temp/ideaIU-2022.3.2.AppDir/AppRun",
+    "desktop":"temp/ideaIU-2022.3.2.AppDir/ideaIU.desktop",
+    "icon": "ideaIU-2022.3.2/idea-IU-223.8617.56/bin/idea.png"
+  }
+}

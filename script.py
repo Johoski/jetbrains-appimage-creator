@@ -1,26 +1,29 @@
 import os
 import shutil
 import platform
+import json
 from PIL import Image
 # for now only works with ideaIU-2022.3.2
 
 # common variables
 dependencies = 'dependencies'
 temp = 'temp'
-icon_width = 256
-icon_height = 256
+icon_size = 256
 arch = 'ARCH=x86_64'
 appimagetool = 'dependencies/appimagetool-x86_64.AppImage'
-# IntelliJ Idea Ultimate variables
-AppDir_ideaIU = "temp/ideaIU-2022.3.2.AppDir"
-usr_ideaIU = "temp/ideaIU-2022.3.2.AppDir/usr"
-bin_ideaIU = "temp/ideaIU-2022.3.2.AppDir/usr/bin"
-ideaIU = "ideaIU-2022.3.2/idea-IU-223.8617.56/"
-icon_ideaIU = "ideaIU-2022.3.2/idea-IU-223.8617.56/bin/idea.png"
-dep_ideaIU_AppRun = "dependencies/ideaIU/AppRun"
-dep_ideaIU_desktop = "dependencies/ideaIU/ideaIU.desktop"
-ideaIU_AppRun = "temp/ideaIU-2022.3.2.AppDir/AppRun"
-ideaIU_desktop = "temp/ideaIU-2022.3.2.AppDir/ideaIU.desktop"
+# read IntelliJ Idea Ultimate variables from conf.json
+with open(os.path.join(dependencies, 'conf.json')) as f:
+    conf = json.load(f)
+    ideaIU_conf = conf['ideaIU-2022_3_2']
+    AppDir_ideaIU = ideaIU_conf['AppDir']
+    usr_ideaIU = ideaIU_conf['usr']
+    bin_ideaIU = ideaIU_conf['bin']
+    source = ideaIU_conf['source']
+    icon_ideaIU = ideaIU_conf['icon']
+    dep_ideaIU_AppRun = ideaIU_conf['dep_AppRun']
+    dep_ideaIU_desktop = ideaIU_conf['dep_desktop']
+    ideaIU_AppRun = ideaIU_conf['AppRun']
+    ideaIU_desktop = ideaIU_conf['desktop']
 
 # checks if needed stuff is there
 def check():
@@ -50,7 +53,7 @@ def createAppDir():
 
 # copies the folder to the appimage one
 def copy_to_AppDir():
-    shutil.copytree(ideaIU, bin_ideaIU)
+    shutil.copytree(source, bin_ideaIU)
 
 
 def set_icon():
@@ -58,7 +61,7 @@ def set_icon():
     with open(icon_ideaIU, 'r+b') as f:
         with Image.open(f) as image:
             image = Image.open(icon_ideaIU)
-            new_image = image.resize((icon_width, icon_height))
+            new_image = image.resize((icon_size, icon_size))
             new_image.save(icon)
 
 
