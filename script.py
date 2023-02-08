@@ -2,7 +2,8 @@ import os
 import shutil
 import platform
 import json
-from zipfile import ZipFile
+import tarfile
+import requests
 from PIL import Image
 # for now only works with ideaIU-2022.3.2
 
@@ -12,11 +13,12 @@ temp = 'temp'
 icon_size = 256
 arch = 'ARCH=x86_64'
 appimagetool = 'dependencies/appimagetool-x86_64.AppImage'
+URL_appimagetool = "https://github.com/AppImage/AppImageKit/releases/download/13/appimagetool-x86_64.AppImage"
 # read IntelliJ Idea Ultimate variables from conf.json
 with open(os.path.join(dependencies, 'conf.json')) as f:
     conf = json.load(f)
     ideaIU_conf = conf['ideaIU-2022_3_2']
-    source_zip_file = ideaIU_conf['zip']
+    source_tar_file = ideaIU_conf['tar']
     AppDir_folder = ideaIU_conf['AppDir']
     usr_folder = ideaIU_conf['usr']
     bin_folder = ideaIU_conf['bin']
@@ -41,14 +43,20 @@ def check():
     else:
         print("Dependencies:        FAILED (Redownload the dependencies folder)")
         exit()
+    isAppImagetool = os.path.isdir(appimagetool)
+    if isAppImagetool:
+        print("AppImage Tool:       OK")
+    else:
+        print("AppImage Tool:       FAILED (Starting download)")
+        response = requests.get(URL_appimagetool)
+        open(appimagetool, "wb").write(response.content)
+        print("AppImage Tool:       FAILED (Download finished)")
 
-def unzip():
-    # loading the temp.zip and creating a zip object
-    with ZipFile(source_zip_file, 'r') as zObject:
-  
-    # Extracting all the members of the zip 
-    # into a specific location.
-    zObject.extractall(temp)
+def extract():
+    file = tarfile.open(source_tar_file)
+    file.extractall(temp)
+    file.close
+
 # creates AppDir
 def createAppDir():
     istemp = os.path.isdir(temp)
