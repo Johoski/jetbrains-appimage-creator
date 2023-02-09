@@ -96,6 +96,7 @@ def createAppImage():
     os.system("sudo " + arch + " " + appimagetool + " " + AppDir_ideaIU)
 
 check()
+extract()
 createAppDir()
 copy_to_AppDir()
 set_icon()
