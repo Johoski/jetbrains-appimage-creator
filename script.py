@@ -51,6 +51,13 @@ def check():
         response = requests.get(URL_appimagetool)
         open(appimagetool, "wb").write(response.content)
         print("AppImage Tool:       FAILED (Download finished)")
+        isAppImagetool = os.path.isdir(appimagetool)
+        if isAppImagetool:
+            print("AppImage Tool:       OK (Download succesful)")
+        else:
+            print("AppImage Tool:       FAILED (Download failed, download the file manually)")
+            exit()
+
 
 def extract():
     file = tarfile.open(source_tar_file)
