@@ -5,24 +5,11 @@
     "usr": "temp/ideaIU-2022.3.2.AppDir/usr",
     "bin":"temp/ideaIU-2022.3.2.AppDir/usr/bin",
     "source":"ideaIU-2022.3.2/idea-IU-223.8617.56/",
-    "dep_AppRun":"dependencies/ideaIU/AppRun",
-    "dep_desktop":"dependencies/ideaIU/ideaIU.desktop",
+    "dep_AppRun":"dependencies/ideaIU/2022_3_2/AppRun",
+    "dep_desktop":"dependencies/ideaIU/2022_3_2/ideaIU.desktop",
     "AppRun":"temp/ideaIU-2022.3.2.AppDir/AppRun",
     "desktop":"temp/ideaIU-2022.3.2.AppDir/ideaIU.desktop",
     "source_icon": "ideaIU-2022.3.2/idea-IU-223.8617.56/bin/idea.png",
     "icon":"temp/ideaIU-2022.3.2.AppDir/idea.png"
-  },
-  "ideaIC-2022_3_2": {
-    "tar":"ideaIC-2022.3.2.tar.gz",
-    "AppDir": "temp/ideaIC-2022.3.2.AppDir",
-    "usr": "temp/ideaIC-2022.3.2.AppDir/usr",
-    "bin":"temp/ideaIC-2022.3.2.AppDir/usr/bin",
-    "source":"ideaIC-2022.3.2/idea-IC-223.8617.56/",
-    "dep_AppRun":"dependencies/ideaIC/AppRun",
-    "dep_desktop":"dependencies/ideaIC/ideaIC.desktop",
-    "AppRun":"temp/ideaIC-2022.3.2.AppDir/AppRun",
-    "desktop":"temp/ideaIC-2022.3.2.AppDir/ideaIC.desktop",
-    "source_icon": "ideaIC-2022.3.2/idea-IC-223.8617.56/bin/idea.png",
-    "icon":"temp/ideaIC-2022.3.2.AppDir/idea.png"
   }
 }
