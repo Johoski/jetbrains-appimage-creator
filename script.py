@@ -58,12 +58,12 @@ def check():
             print("AppImage Tool:       FAILED (Download failed, download the file manually)")
             exit()
 
-
-def extract():
-    file = tarfile.open(source_tar_file)
-    file.extractall(temp)
-    file.close
-
+def unzip():
+    # loading the temp.zip and creating a zip object
+    with ZipFile(source_zip_file, 'r') as zObject:
+        # Extracting all the members of the zip  into a specific location.
+        zObject.extractall(temp)
+        
 # creates AppDir
 def createAppDir():
     istemp = os.path.isdir(temp)
