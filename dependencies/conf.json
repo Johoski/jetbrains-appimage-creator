@@ -1,5 +1,6 @@
 {
   "ideaIU-2022_3_2": {
+    "link":"https://download.jetbrains.com/idea/ideaIU-2022.3.2.tar.gz",
     "tar":"ideaIC-2022.3.2.tar.gz",
     "AppDir": "temp/ideaIU-2022.3.2.AppDir",
     "usr": "temp/ideaIU-2022.3.2.AppDir/usr",
